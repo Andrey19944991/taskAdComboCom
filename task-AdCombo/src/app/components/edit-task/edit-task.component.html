@@ -1,0 +1,86 @@
+<div class="container">
+  <form [formGroup]="taskForm" (ngSubmit)="submit()" #form="ngForm">
+    <h3>Adding new task !</h3>
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" placeholder="Title" [formControl]="title" required
+             minlength="4" formControlName="title"
+             [class.is-invalid]="title.invalid && (title.touched || form.submitted)"/>
+      <div class="invalid-feedback">
+        <div *ngIf="title.errors?.required">
+          Title is required
+        </div>
+        <div *ngIf="title.errors?.minlength">
+          Title is too small
+        </div>
+        <div *ngIf="title.errors?.maxlength">
+          Title is too long
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" class="form-control" placeholder="Description"
+             [formControl]="description" [class.is-invalid]="description.invalid &&
+              (description.touched || form.submitted)" required minlength="4">
+      <div class="invalid-feedback">
+        <div *ngIf="description.errors?.required">
+          Description is required
+        </div>
+        <div *ngIf="description.errors?.minlength">
+          Description is too small
+        </div>
+        <div *ngIf="description.errors?.maxlength">
+          Description is too long
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>The importance of the task</label>
+      <select class="custom-select" required formControlName="importance" [formControl]="importance"
+              [class.is-invalid]="importance.invalid && (importance.touched || form.submitted)">
+        <option value="Normal">Normal</option>
+        <option value="Important">Important</option>
+        <option value="Very important">Very important</option>
+      </select>
+      <div class="invalid-feedback">
+        <div *ngIf="importance.errors?.required">
+          Importance of task is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Created date</label>
+      <input type="date" class="form-control" formControlName="createdDate" required [formControl]="createdDate"
+             [class.is-invalid]="createdDate.invalid && (createdDate.touched || form.submitted)">
+      <div class="invalid-feedback">
+        <div *ngIf="createdDate.errors?.required">
+          You must select date
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Deadline date</label>
+      <input type="date" class="form-control" formControlName="deadlineDate">
+      <div class="invalid-feedback">
+        Please choose date
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Completed date</label>
+      <input type="date" class="form-control" formControlName="completedDate">
+      <div class="invalid-feedback">
+        Please choose date
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" >Submit</button>
+  </form>
+</div>
+
